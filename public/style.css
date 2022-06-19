@@ -1,0 +1,181 @@
+ *{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+ }
+ body {
+    padding: 1%;
+ }
+ .clearFix::after,.clearFix::before{
+    content: '';
+    clear: both;
+    display: block;
+    font-size: 0;
+ }
+
+ .cardForm *:not(button) {
+    display: block;
+    margin: 1% 0;
+    font-size: 1rem;
+    
+ }
+ .formSection{
+    display: flex;
+    justify-content: space-evenly;
+    background-color: rgb(63, 59, 59);
+    padding: 1%;
+
+ }
+ .cardForm{
+    width: 40%;
+    padding-bottom: 10%;
+ }
+ .picture_wrapper{
+    width: 30%;
+    /* flex-grow: 1; */
+ }
+.picture_confirm{
+    display: inline-block;
+    width: 20%;
+    background-color: lightgray;
+    border-radius: 3px;
+    font-size: 2rem; 
+}
+ /*Button styles*/
+ .addCardButton{
+    background-color: rgb(127, 158, 127);
+    font-size: 1rem;
+    font-weight: 600;
+ }
+ .removeCardButton{
+    background-color: rgb(206, 64, 28);
+    font-size: 1rem;
+    font-weight: 600;
+ }
+ .changeCardButton{
+    background-color: rgb(14, 131, 240);
+    font-size: 1rem;
+    font-weight: 600;
+ }
+ button {
+    display: inline;
+    border: none;
+    border-radius: 3px;
+    padding: 0.5rem 2%;
+    margin-right:20px;
+ }
+ button:hover{
+    filter: brightness(50%);
+    transform: scale(1.05);
+ }
+
+
+ /*Image monitor style*/
+
+ .picture_monitor{
+    width: 40%;
+    margin: 0 auto;
+ }
+ .picture_monitor > img {
+    display: block;
+    width: 100%;
+    
+ }
+
+ .swiper-slide > img {
+    max-width: 223px;
+ }
+
+ /*Deck card section*/
+ .cardWrapper{
+    position: relative;
+    width: 15%;
+    margin: 0.5% 0;
+    text-align: center;
+ }
+ .cardWrapper > img{
+    display: block;
+    width: 100%;
+ }
+ .deckCards{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2%;
+ }
+
+
+
+
+ /*Deck slider*/
+ .slide-container{
+    position: absolute;
+    padding: 10% 0;
+    border-radius: 3px;
+    top: 50%;  
+    left: 50%; 
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 142, 224, 0.8);  
+    width: 50%;
+    z-index: 100;
+    display: none;
+ }
+ 
+
+ .swiper-slide {
+    display: flex;
+    justify-content: center;
+    border-radius: 10px;
+  }
+  .close-window{
+    position: absolute;
+    top:4px;
+    right: 14px;
+    font-size: 1.5rem;
+    font-weight: 900;
+    cursor: pointer;
+  }
+  .open-window{
+    font-size: 4rem;
+    cursor: pointer;
+    color: rgb(9, 0, 58);
+  }
+  /* .swiper {
+    width: 70%;
+    display: flex;
+    border: 2px solid rgb(153, 51, 51);
+    justify-content: center;
+     align-items: center;
+  } */
+
+
+
+  /*Cards wrapper styling*/
+  .fa-trash-can{
+    font-size: 1.2rem;
+    color: rgb(61, 61, 61);
+    cursor: pointer;
+    border-radius: 3px;
+    transition: box-shadow 100ms linear;
+  }
+  .fa-trash-can:hover{
+    box-shadow:inset 2px 2px 6px rgb(253, 65, 65),inset -2px -2px 6px rgb(253, 65, 65);
+  }
+  .fa-check{
+    font-size: 1.2rem;
+    padding-left: 5px;
+    transition: text-shadow 200ms linear;
+  }
+  .fa-check:hover{
+    text-shadow: 1px 1px 2px rgb(0, 194, 0),-1px -1px 2px rgb(0, 194, 0);
+  }
+
+  .cardCounter{
+    text-align: center;
+    padding-left: 10px;
+    width: 50px;
+    font-weight: 600;
+  }
+.cardWrapper *::selection{
+        color: none;
+        background: none;
+}
