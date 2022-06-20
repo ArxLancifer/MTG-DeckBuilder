@@ -16,9 +16,9 @@
  .cardForm *:not(button) {
     display: block;
     margin: 1% 0;
-    font-size: 1rem;
-    
+    font-size: 1rem;  
  }
+ 
  .formSection{
     display: flex;
     justify-content: space-evenly;
@@ -27,12 +27,11 @@
 
  }
  .cardForm{
-    width: 40%;
+    width: 50%;
     padding-bottom: 10%;
  }
  .picture_wrapper{
-    width: 30%;
-    /* flex-grow: 1; */
+    width: 25%;
  }
 .picture_confirm{
     display: inline-block;
@@ -40,6 +39,10 @@
     background-color: lightgray;
     border-radius: 3px;
     font-size: 2rem; 
+}
+.searchCard{
+    width: 25%;
+    text-align: center;
 }
 #searchCardByName{
    padding: 4px;
@@ -51,8 +54,19 @@
    top: 3px;
    font-size: 1.3rem;
    box-shadow: 2px 2px 5px rgb(66, 66, 66);
-   cursor: pointer;
-   
+   cursor: pointer; 
+}
+.searchResults{
+    width: 100%;
+    padding: 4% 2% 0% 2%;
+}
+.searchResults img {
+    display: block;
+    width: 180px;
+    transition: transform 200ms linear;
+}
+.searchResults img:hover{
+    transform: scale(1.1);
 }
  /*Button styles*/
  .addCardButton{
@@ -86,12 +100,16 @@
  /*Image monitor style*/
 
  .picture_monitor{
-    width: 40%;
+    position: relative;
+    width: 60%;
     margin: 0 auto;
  }
  .picture_monitor > img {
+    position: absolute;
     display: block;
-    width: 100%;
+    transform: translate(50%,50%);
+    width: 50%;
+    margin: 0 auto;
     
  }
 
@@ -192,3 +210,6 @@
         color: none;
         background: none;
 }
+
+
+

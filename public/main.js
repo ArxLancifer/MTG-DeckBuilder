@@ -24,7 +24,7 @@ removeCard.addEventListener('click', deleteCard)
 /* Fetch Functions */
 async function insertCard(e) {
     e.preventDefault()
-    if(cardName.value =="" || cardPicture.value =="") {
+    if (cardName.value == "" || cardPicture.value == "") {
         console.log("Card and Link should have VALUE")
         return;
     }
@@ -41,17 +41,18 @@ async function insertCard(e) {
         .catch(error => console.error(error))
 }
 /*Fetch Delete card */
-async function deleteCard(e){
+async function deleteCard(e) {
     e.preventDefault()
     await fetch('/deck_builder', {
         method: 'delete',
-        headers: {'Content-Type':'application/json'},
-        body:JSON.stringify({
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
             cardName: "Ancestor's Chosen"
         })
     }).then(res => {
         console.log(res.status)
-        res.json()})
+        res.json()
+    })
     //.then(data=>console.log(data))
 }
 
@@ -69,70 +70,78 @@ openDeckSlider.addEventListener('click', () => {
 /*TrashCan Icon */
 trashcan.forEach(icon => {
     icon.addEventListener('click', (e) => {
-    console.log(e.target.parentNode.parentNode)
-    e.target.parentNode.parentNode.style.display = 'none'
-})
+        console.log(e.target.parentNode.parentNode)
+        e.target.parentNode.parentNode.style.display = 'none'
+    })
 })
 /*Minus Icon */
-minusIcon.forEach(icon=>{
-    icon.addEventListener('click', (e)=>{
+minusIcon.forEach(icon => {
+    icon.addEventListener('click', (e) => {
         let cardQuantity = e.target.parentNode.parentNode.querySelector("span").textContent.split('')[1];
         let cardCounterInput = e.target.parentNode.querySelector('.cardCounter');
-        
+
         // +cardCounterInput.value >-cardQuantity? +cardCounterInput.value-- : null; 
         console.log(cardQuantity - (-cardCounterInput.value))
-        if(cardQuantity - (-cardCounterInput.value) > 0) cardCounterInput.value--
-        else return null   
+        cardQuantity - (-cardCounterInput.value) > 0 ? cardCounterInput.value--:null
     });
 })
 /*Plus Icon */
-plusIcon.forEach(icon=>{
-    icon.addEventListener('click', (e)=>{
+plusIcon.forEach(icon => {
+    icon.addEventListener('click', (e) => {
         let cardQuantity = e.target.parentNode.parentNode.querySelector("span").textContent.split('')[1];
-        console.log(cardQuantity)
-       let cardCounterInput = e.target.parentNode.querySelector('.cardCounter'); 
-        +cardCounterInput.value < +cardQuantity ? +cardCounterInput.value++: null;    
+        
+        let cardCounterInput = e.target.parentNode.querySelector('.cardCounter');
+        (+cardCounterInput.value)+(+cardQuantity) < 4  ? +cardCounterInput.value++ : null;
     });
 })
 /* Check icon to update card quantity */
-checkUpdateIcon.forEach(icon=>{
-    icon.addEventListener('click', async (e)=>{
+checkUpdateIcon.forEach(icon => {
+    icon.addEventListener('click', async (e) => {
         let cardName = e.target.parentNode.parentNode.querySelector('.cardName').textContent;
         let quantityToAdd = e.target.parentNode.querySelector('.cardCounter').value;
         console.log(quantityToAdd)
         console.log(cardName)
         await fetch('/deck_builder', {
-                    method: 'put',
-                    headers: {'Content-Type':'application/json'},
-                    body:JSON.stringify({
-                        cardName: cardName,
-                        quantityToAdd: quantityToAdd
-                    })
-                }).then(res => {
-                    if (res.ok) return res.json()
-                }).then(data => window.location.reload(true))
-                    .catch(error => console.error(error))
+            method: 'put',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                cardName: cardName,
+                quantityToAdd: quantityToAdd
+            })
+        }).then(res => {
+            if (res.ok) return res.json()
+        }).then(data => window.location.reload(true))
+            .catch(error => console.error(error))
     })
 })
 
 /*Card selection container function*/
-function cardsSelection(data){
+function cardsSelection(data) {
     const imgDiv = document.createElement('div');
-    imgDiv.classList.add("swiper-slide")
+    const sliderIMG = document.createElement('img');
+    imgDiv.classList.add("swiper-slide");
+    sliderIMG.classList.add("swiper-lazy")
+    sliderIMG.src = `${data}`
+    imgDiv.appendChild(sliderIMG);
+    document.querySelector('.swiperSearchedSlide > .swiper-wrapper').appendChild(imgDiv);
     
+
 }
 /*Search card by name from MTG API */
-searchCardByName.addEventListener('click', async()=>{
+searchCardByName.addEventListener('click', async () => {
     const cardNameInput = document.querySelector('#searchCardByName');
     let cardData = [];
     await fetch(`https://api.magicthegathering.io/v1/cards?name=${cardNameInput.value}`)
-    .then(res => res.json())
-    .then(data => {
-        cardData =  data.cards.slice(0,4).filter((obj)=> obj.imageUrl)
-    }).catch(error=> console.log(error))
-    console.log(cardData)
+        .then(res => res.json())
+        .then(data => {
+            cardData = data.cards.slice(0, 4).filter((obj) => obj.imageUrl)
+        }).catch(error => console.log(error))
+     console.log(cardData)
     /*Function that creates card selection container needs to be added here*/
-
+    cardData.forEach(data => {
+        console.log(data.imageUrl)    
+        cardsSelection(data.imageUrl)
+    })
 })
 
 // document.querySelector('.test').addEventListener('click', async(e)=>{
