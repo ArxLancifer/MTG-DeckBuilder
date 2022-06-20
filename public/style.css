@@ -12,7 +12,7 @@
     display: block;
     font-size: 0;
  }
-
+/*Card form & Search */
  .cardForm *:not(button) {
     display: block;
     margin: 1% 0;
@@ -40,6 +40,19 @@
     background-color: lightgray;
     border-radius: 3px;
     font-size: 2rem; 
+}
+#searchCardByName{
+   padding: 4px;
+}
+
+.searchCard > label  {
+   position: relative;
+   right: 26px;
+   top: 3px;
+   font-size: 1.3rem;
+   box-shadow: 2px 2px 5px rgb(66, 66, 66);
+   cursor: pointer;
+   
 }
  /*Button styles*/
  .addCardButton{

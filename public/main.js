@@ -11,6 +11,7 @@ const trashcan = document.querySelectorAll('.fa-trash-can');
 const minusIcon = document.querySelectorAll('.fa-minus-square');
 const plusIcon = document.querySelectorAll('.fa-plus-square');
 const checkUpdateIcon = document.querySelectorAll('.fa-check');
+const searchCardByName = document.querySelector('.fa-magnifying-glass')
 
 pictureConfirm.addEventListener('click', () => {
     // console.log("Input changed to: " + cardPicture.value)
@@ -112,6 +113,26 @@ checkUpdateIcon.forEach(icon=>{
                 }).then(data => window.location.reload(true))
                     .catch(error => console.error(error))
     })
+})
+
+/*Card selection container function*/
+function cardsSelection(data){
+    const imgDiv = document.createElement('div');
+    imgDiv.classList.add("swiper-slide")
+    
+}
+/*Search card by name from MTG API */
+searchCardByName.addEventListener('click', async()=>{
+    const cardNameInput = document.querySelector('#searchCardByName');
+    let cardData = [];
+    await fetch(`https://api.magicthegathering.io/v1/cards?name=${cardNameInput.value}`)
+    .then(res => res.json())
+    .then(data => {
+        cardData =  data.cards.slice(0,4).filter((obj)=> obj.imageUrl)
+    }).catch(error=> console.log(error))
+    console.log(cardData)
+    /*Function that creates card selection container needs to be added here*/
+
 })
 
 // document.querySelector('.test').addEventListener('click', async(e)=>{
