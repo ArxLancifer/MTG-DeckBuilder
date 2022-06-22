@@ -3,6 +3,14 @@
     margin: 0;
     box-sizing: border-box;
  }
+ img::selection 
+{
+    background-color:transparent;
+} 
+*::-moz-selection
+{
+    background-color:transparent;
+}
  body {
     padding: 1%;
  }
@@ -12,6 +20,9 @@
     display: block;
     font-size: 0;
  }
+h1{
+    text-align: center;
+}
 /*Card form & Search */
  .cardForm *:not(button) {
     display: block;
@@ -22,12 +33,15 @@
  .formSection{
     display: flex;
     justify-content: space-evenly;
-    background-color: rgb(63, 59, 59);
+    background-color: rgb(39, 39, 39);
     padding: 1%;
 
  }
+ .cardForm>label{
+    color: #fff;
+ }
  .cardForm{
-    width: 50%;
+    width: 40%;
     padding-bottom: 10%;
  }
  .picture_wrapper{
@@ -35,24 +49,31 @@
  }
 .picture_confirm{
     display: inline-block;
-    width: 20%;
+    max-width: 120px;
     background-color: lightgray;
     border-radius: 3px;
     font-size: 2rem; 
 }
 .searchCard{
+    position: relative;
     width: 25%;
     text-align: center;
+
+}
+.searchCard >p {
+    position: relative;
+    right: 32px;
+    color: #fff;
 }
 #searchCardByName{
    padding: 4px;
 }
 
-.searchCard > label  {
+.fa-magnifying-glass  {
    position: relative;
    right: 26px;
-   top: 3px;
-   font-size: 1.3rem;
+   top: 4px;
+   font-size: 1.48rem;
    box-shadow: 2px 2px 5px rgb(66, 66, 66);
    cursor: pointer; 
 }
@@ -60,6 +81,7 @@
     width: 100%;
     padding: 4% 2% 0% 2%;
 }
+
 .searchResults img {
     display: block;
     width: 180px;
@@ -69,6 +91,12 @@
     transform: scale(1.1);
 }
  /*Button styles*/
+ .postButtons{
+    display: flex;
+ }
+ .postButtons > button{
+    width: 20%;
+ }
  .addCardButton{
     background-color: rgb(127, 158, 127);
     font-size: 1rem;
@@ -78,6 +106,7 @@
     background-color: rgb(206, 64, 28);
     font-size: 1rem;
     font-weight: 600;
+    margin: 2%;
  }
  .changeCardButton{
     background-color: rgb(14, 131, 240);
@@ -88,8 +117,9 @@
     display: inline;
     border: none;
     border-radius: 3px;
-    padding: 0.5rem 2%;
-    margin-right:20px;
+    padding: 0.5rem 0;
+    margin:2% 0%;
+    transition: transform 200ms linear;
  }
  button:hover{
     filter: brightness(50%);
@@ -98,18 +128,16 @@
 
 
  /*Image monitor style*/
-
  .picture_monitor{
     position: relative;
-    width: 60%;
+    width: 100%;
     margin: 0 auto;
  }
  .picture_monitor > img {
-    position: absolute;
     display: block;
-    transform: translate(50%,50%);
-    width: 50%;
+    width: 100%;
     margin: 0 auto;
+    padding: 15%;
     
  }
 
@@ -213,3 +241,64 @@
 
 
 
+/*MEDIA QUERIES*/
+
+@media all and (max-width: 886px) {   
+    .fa-magnifying-glass  {
+        left:80px;
+        top: -25px;
+     }
+     .postButtons button{
+        font-size: 0.8rem;
+     }
+     .searchCard > p {
+        right: 10px;
+     }
+}
+
+@media all and (max-width: 576px) { 
+    *{
+        font-size: 90%;
+    }  
+    .formSection{
+        flex-direction: column;
+    }
+    .formSection >*{
+        width: 100%;
+    }
+    .fa-magnifying-glass{
+       left:-26px;
+       top:4px;
+    }
+    .searchResults{
+        width: 90%;
+        margin: 0 auto;
+    }
+    .searchResults img{
+        width: 160px;
+    }
+    .cardWrapper > span,
+    .cardWrapper > p,
+    .cardWrapper >div{
+        display: none;
+    }
+    .cardForm{
+        padding: 0;
+    }
+    .searchCard > p {
+        position: relative;
+        right: 32px;
+    }
+    .cardWrapper {
+        width: 22%;
+    }
+    .deckCards{
+        justify-content: center;
+    }
+    .cardWrapper>img{
+        transition: transform 200ms linear;
+    }
+    .cardWrapper>img:hover{
+        transform: scale(1.2);
+    }
+}

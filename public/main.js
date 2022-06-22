@@ -24,6 +24,7 @@ removeCard.addEventListener('click', deleteCard)
 /* Fetch Functions */
 async function insertCard(e) {
     e.preventDefault()
+    
     if (cardName.value == "" || cardPicture.value == "") {
         console.log("Card and Link should have VALUE")
         return;
@@ -33,11 +34,12 @@ async function insertCard(e) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
             name: cardName.value,
-            img: cardPicture.value
+            img: cardPicture.value,
+            quantity:1
         })
     }).then(res => {
         if (res.ok) return res.json()
-    }).then(data => window.location.reload(true))
+    }).then(data => console.log(data))//window.location.reload(true)
         .catch(error => console.error(error))
 }
 /*Fetch Delete card */
@@ -121,11 +123,10 @@ function cardsSelection(data) {
     const sliderIMG = document.createElement('img');
     imgDiv.classList.add("swiper-slide");
     sliderIMG.classList.add("swiper-lazy")
-    sliderIMG.src = `${data}`
+    sliderIMG.src = `${data.imageUrl}`;
+    sliderIMG.name = `${data.name}`
     imgDiv.appendChild(sliderIMG);
     document.querySelector('.swiperSearchedSlide > .swiper-wrapper').appendChild(imgDiv);
-    
-
 }
 /*Search card by name from MTG API */
 searchCardByName.addEventListener('click', async () => {
@@ -138,9 +139,15 @@ searchCardByName.addEventListener('click', async () => {
         }).catch(error => console.log(error))
      console.log(cardData)
     /*Function that creates card selection container needs to be added here*/
-    cardData.forEach(data => {
-        console.log(data.imageUrl)    
-        cardsSelection(data.imageUrl)
+    cardData.forEach(data => {   
+        cardsSelection(data)
+    })
+    document.querySelectorAll(".searchResults img").forEach(image=>{
+        image.addEventListener('click',(e)=>{
+            console.log(e.target)
+            cardName.value = e.target.name;
+            cardPicture.value = e.target.src;
+        })
     })
 })
 
