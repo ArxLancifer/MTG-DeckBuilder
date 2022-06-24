@@ -7,7 +7,7 @@ app.set('view engine', 'ejs')
 app.use(express.json())
 app.use(express.static(__dirname + '/public'))
 
-MongoClient.connect(DB_STRING)
+MongoClient.connect(`mongodb+srv://Arx_Lancifer:jRjYldvotSLLxMxh@cluster0.w4sq0l0.mongodb.net/?retryWrites=true&w=majority`)
 .then(client =>{
     console.log('Connected to MTG Database')
     const deckDB = client.db('mtg-deck-builder');
