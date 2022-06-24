@@ -2,12 +2,12 @@ const express = require('express');
 const app = express();
 const MongoClient = require('mongodb').MongoClient;
 const PORT = process.env.PORT || 5000;
-
+const DB_STRING = process.env.DB_STRING
 app.set('view engine', 'ejs')
 app.use(express.json())
 app.use(express.static(__dirname + '/public'))
 
-MongoClient.connect('mongodb+srv://Arx_Lancifer:jRjYldvotSLLxMxh@cluster0.w4sq0l0.mongodb.net/?retryWrites=true&w=majority')
+MongoClient.connect(DB_STRING)
 .then(client =>{
     console.log('Connected to MTG Database')
     const deckDB = client.db('mtg-deck-builder');

@@ -8,7 +8,6 @@ const swiper = new Swiper(".mySwiper", {
   });
 
   const swiperSearchedSlide = new Swiper(".swiperSearchedSlide", {
-    observer: true,
     slidesPerView: 1,
     spaceBetween: 1,
     slidesPerGroup: 1,

@@ -39,7 +39,7 @@ async function insertCard(e) {
         })
     }).then(res => {
         if (res.ok) return res.json()
-    }).then(data => console.log(data))//window.location.reload(true)
+    }).then(data =>window.location.reload(true))
         .catch(error => console.error(error))
 }
 /*Fetch Delete card */

@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "devmon":"nodemon server.js"
+    "devmon":"nodemon server.js",
+    "devmonX":"eval $(cat .env) node server.js"
   },
   "author": "",
   "license": "ISC",
