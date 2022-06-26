@@ -14,7 +14,6 @@ const checkUpdateIcon = document.querySelectorAll('.fa-check');
 const searchCardByName = document.querySelector('.fa-magnifying-glass')
 
 pictureConfirm.addEventListener('click', () => {
-    // console.log("Input changed to: " + cardPicture.value)
     picture_monitor.innerHTML = `<img src='${cardPicture.value}'>`
 })
 
@@ -49,13 +48,11 @@ async function deleteCard(e) {
         method: 'delete',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-            cardName: "Ancestor's Chosen"
+            cardName: cardName.value
         })
     }).then(res => {
-        console.log(res.status)
-        res.json()
+        window.location.reload(true)
     })
-    //.then(data=>console.log(data))
 }
 
 
@@ -72,8 +69,9 @@ openDeckSlider.addEventListener('click', () => {
 /*TrashCan Icon */
 trashcan.forEach(icon => {
     icon.addEventListener('click', (e) => {
-        console.log(e.target.parentNode.parentNode)
-        e.target.parentNode.parentNode.style.display = 'none'
+        cardName.value = e.target.parentNode.parentNode.querySelector('p').textContent;
+        document.querySelector('.deleteMsg').textContent = `Do you want to delete ${cardName.value}? press Remove`;
+        document.querySelector('.deleteMsg').style.opacity = '1';
     })
 })
 /*Minus Icon */

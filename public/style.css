@@ -3,14 +3,7 @@
     margin: 0;
     box-sizing: border-box;
  }
- img::selection 
-{
-    background-color:transparent;
-} 
-*::-moz-selection
-{
-    background-color:transparent;
-}
+
  body {
     padding: 1%;
  }
@@ -29,12 +22,12 @@ h1{
     margin: 1% 0;
     font-size: 1rem;  
  }
- 
  .formSection{
     display: flex;
     justify-content: space-evenly;
     background-color: rgb(39, 39, 39);
     padding: 1%;
+    border-radius: 3px;
 
  }
  .cardForm>label{
@@ -68,7 +61,12 @@ h1{
 #searchCardByName{
    padding: 4px;
 }
-
+span.deleteMsg{
+    font-size: 1.2rem;
+    color: rgb(240, 124, 124);
+    opacity: 0;
+    transition: opacity 300ms linear;
+}
 .fa-magnifying-glass  {
    position: relative;
    right: 26px;
@@ -197,6 +195,15 @@ h1{
     font-size: 4rem;
     cursor: pointer;
     color: rgb(9, 0, 58);
+  }
+  .decksCollection{
+    display: flex;
+    gap: 1rem;
+    text-align: center;
+    align-items: flex-end;
+  }
+  .createDeck + p{
+    font-weight: 700;
   }
   /* .swiper {
     width: 70%;

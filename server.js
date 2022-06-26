@@ -7,20 +7,23 @@ app.set('view engine', 'ejs')
 app.use(express.json())
 app.use(express.static(__dirname + '/public'))
 
-MongoClient.connect(`mongodb+srv://Arx_Lancifer:jRjYldvotSLLxMxh@cluster0.w4sq0l0.mongodb.net/?retryWrites=true&w=majority`)
+MongoClient.connect(DB_STRING)
 .then(client =>{
     console.log('Connected to MTG Database')
     const deckDB = client.db('mtg-deck-builder');
     const deckCollection = deckDB.collection('mydeck')
 
-    app.get('/', async (req, res)=>{
+    app.get('/', async (req, res)=>{ //app.get(`name=${deckname}`, async (req, res)
         //Used this 3 lines to set quantity values ive forgot for all documents
         // await deckCollection.find().forEach(item=>{
         //    deckCollection.update({},{$set:{quantity:1}})
         // })
         //console.log(await deckCollection.find({name: "Ancestor's Chosen"}).toArray())
+ 
+        const name = req.query.name || 'mydeck';
+        console.log(name)
         try {
-        const deck =  await deckCollection.find().toArray();
+        const deck =  await deckCollection.find().toArray(); //deckDB.collection(`${deckname}`)
         res.render('index.ejs', {cards:deck})
         } catch (error) {
             console.log(error)
@@ -49,7 +52,7 @@ MongoClient.connect(`mongodb+srv://Arx_Lancifer:jRjYldvotSLLxMxh@cluster0.w4sq0l
     })
 
     app.put('/deck_builder', (req, res)=>{
-
+        console.log(req.body.quantityToAdd)
         deckCollection.updateOne(
             {name:req.body.cardName,
             },

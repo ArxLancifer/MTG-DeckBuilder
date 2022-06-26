@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
     <link rel="stylesheet" href="style.css">
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <script src="https://kit.fontawesome.com/05bc888b6b.js" crossorigin="anonymous"></script>
@@ -12,80 +13,85 @@
     <script src="swiper.js" defer></script>
     <title>MTG Deck</title>
 </head>
+
 <body>
     <header>
         <h1>Build you deck summoner</h1>
-        <span class="open-window">&#127136;</span>
-        <span>Deck</span>
+        <div class="decksCollection">
+            <div class="deck">
+                <span class="open-window">&#127136;</span>
+                <p>Deck_one</p>
+            </div>
+            <div class="deck">
+                <span class="open-window createDeck">&#127220;</span>
+                <p>Create deck</p>
+            </div>
+        </div>
     </header>
     <section class="formSection">
-        
-    <form class="cardForm">
-        <label for="cardName">Card Name</label>
-        <input type="text" name="cardName" placeholder="Card Name" required>
-        <label for="cardPicture">Card Picture</label>
-        <input type="text" name="cardPicture" placeholder="Card Picture (link)" required>
-        <span class="picture_confirm">Confirm Picture</span>
-        <div class="postButtons">
-        <button class="addCardButton">Add</button>
-        <button class="removeCardButton">Remove</button>
-        <button class="changeCardButton">Change</button>
-        </div>
-    </form>
-    <div class="searchCard">
-        <p>Search Card by Name</p>
-        <input id="searchCardByName" type="text" placeholder="Search">
-        <i class="fa-solid fa-magnifying-glass"></i>
-        <div class="searchResults">
-            <div class="swiper swiperSearchedSlide">
-            <div class="swiper-wrapper">
+
+        <form class="cardForm">
+            <label for="cardName">Card Name</label>
+            <input type="text" name="cardName" placeholder="Card Name" required>
+            <label for="cardPicture">Card Picture</label>
+            <input type="text" name="cardPicture" placeholder="Card Picture (link)" required>
+            <span class="picture_confirm">Confirm Picture</span>
+            <div class="postButtons">
+                <button class="addCardButton">Add</button>
+                <button class="removeCardButton">Remove</button>
+                <button class="changeCardButton">Change</button>
             </div>
-            
-            <div class="swiper-button-next"></div>
-            <div class="swiper-button-prev"></div>
-            <div class="swiper-pagination"></div>
-          </div></div>
-    </div>
-    
-    <div class="picture_wrapper">
-    <div class="picture_monitor"></div>
-    </div>
-    
+            <span class="deleteMsg"></span>
+        </form>
+        <div class="searchCard">
+            <p>Search Card by Name</p>
+            <input id="searchCardByName" type="text" placeholder="Search">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <div class="searchResults">
+                <div class="swiper swiperSearchedSlide">
+                    <div class="swiper-wrapper"></div>
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-pagination"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="picture_wrapper">
+            <div class="picture_monitor"></div>
+        </div>
+
     </section>
     <main>
         <div class="slide-container">
             <span class="close-window">&#66338;</span>
             <div class="swiper mySwiper">
                 <div class="swiper-wrapper">
-                    <%cards.map(card=>{ %>
-                
+                    <%cards.map(card=>{%>
                         <div class="swiper-slide">
-                            <img src=<%= card.img %> alt="">
+                            <img src='<%=card.img%>'  alt="">
                         </div>
-                    <%})%>
-              </div>
-        </div>
+                        <%})%>
+                </div>
+            </div>
         </div>
         <section class="deckCards">
-            <%cards.map(card=>{ %>
-                
+            <%cards.map(card=>{%>
                 <div class="cardWrapper">
                     <img src=<%= card.img %> alt="">
-                    <span>&#215;<%= card.quantity %></span>                   
-                    <p class="cardName"><%= card.name%></p>
+                    <span>&#215;<%= card.quantity %></span>
+                    <p class="cardName"><%= card.name %></p>
                     <div>
-                         <i class="fa-solid fa-trash-can"></i>
-                         <i class="far fa-minus-square"></i>
-                         <input class="cardCounter" type="number" value="1" disabled>
-                         <i class="far fa-plus-square"></i>
-                         <i class="fas fa-check"></i>
+                        <i class="fa-solid fa-trash-can"></i>
+                        <i class="far fa-minus-square"></i>
+                        <input class="cardCounter" type="number" value="1" disabled>
+                        <i class="far fa-plus-square"></i>
+                        <i class="fas fa-check"></i>
                     </div>
-                   
                 </div>
-            <%})%>    
+                <%})%>
         </section>
         <button class="test">put req</button>
     </main>
-    
 </body>
 </html>
