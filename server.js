@@ -13,17 +13,16 @@ MongoClient.connect(DB_STRING)
     const deckDB = client.db('mtg-deck-builder');
     const deckCollection = deckDB.collection('mydeck')
 
-    app.get('/', async (req, res)=>{ //app.get(`name=${deckname}`, async (req, res)
+    app.get(`/`, async (req, res)=>{ //app.get(`name=${deckname}`, async (req, res)
         //Used this 3 lines to set quantity values ive forgot for all documents
         // await deckCollection.find().forEach(item=>{
         //    deckCollection.update({},{$set:{quantity:1}})
         // })
         //console.log(await deckCollection.find({name: "Ancestor's Chosen"}).toArray())
- 
-        const name = req.query.name || 'mydeck';
-        console.log(name)
+        var ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress 
+        const deckname = req.query.name || 'mydeck';
         try {
-        const deck =  await deckCollection.find().toArray(); //deckDB.collection(`${deckname}`)
+        const deck =  await deckDB.collection(`${deckname}`).find().toArray(); //deckDB.collection(`${deckname}`)
         res.render('index.ejs', {cards:deck})
         } catch (error) {
             console.log(error)
@@ -63,6 +62,18 @@ MongoClient.connect(DB_STRING)
         
     })
 
+    app.post('/create_deck', async(req, res)=>{
+        try {
+            // if(!deckDB.listCollections({name:'A new collection'}))
+                await deckDB.createCollection('A new collection');
+                res.json("newDeck created")
+        } catch (error) {
+            res.json('Deck already exists')
+        }
+        
+        
+        
+    })
     
     app.listen(PORT, ()=>{
         console.log(`Server is running on PORT: ${PORT}`)
