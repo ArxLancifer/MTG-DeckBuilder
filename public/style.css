@@ -213,8 +213,30 @@ span.deleteMsg{
      align-items: center;
   } */
 
-
-
+/*New Deck*/
+.newDeck{
+    position: absolute;
+    padding: 2% 0;
+    border-radius: 3px;
+    top: 50%;  
+    left: 50%; 
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 142, 224, 0.8);  
+    width: 20%;
+    text-align: center;
+    display: none;
+}
+.addDeckBTN{
+    padding: 2%;
+    background-color: lightgrey;
+    width: 40%;
+    border-radius: 3px;
+    margin: 4% auto;
+    cursor: pointer;
+}
+.addDeckBTN:hover{
+    box-shadow: 2px 2px 5px rgb(49, 46, 46),-2px -2px 5px rgb(49, 46, 46);
+}
   /*Cards wrapper styling*/
   .fa-trash-can{
     font-size: 1.2rem;

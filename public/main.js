@@ -12,6 +12,7 @@ const minusIcon = document.querySelectorAll('.fa-minus-square');
 const plusIcon = document.querySelectorAll('.fa-plus-square');
 const checkUpdateIcon = document.querySelectorAll('.fa-check');
 const searchCardByName = document.querySelector('.fa-magnifying-glass')
+const createDeck = document.querySelector('.createDeck');
 
 pictureConfirm.addEventListener('click', () => {
     picture_monitor.innerHTML = `<img src='${cardPicture.value}'>`
@@ -79,8 +80,6 @@ minusIcon.forEach(icon => {
     icon.addEventListener('click', (e) => {
         let cardQuantity = e.target.parentNode.parentNode.querySelector("span").textContent.split('')[1];
         let cardCounterInput = e.target.parentNode.querySelector('.cardCounter');
-
-        // +cardCounterInput.value >-cardQuantity? +cardCounterInput.value-- : null; 
         console.log(cardQuantity - (-cardCounterInput.value))
         cardQuantity - (-cardCounterInput.value) > 0 ? cardCounterInput.value--:null
     });
@@ -148,6 +147,24 @@ searchCardByName.addEventListener('click', async () => {
         })
     })
 })
+
+createDeck.addEventListener('click', newDeck);
+function newDeck(){
+    document.querySelector('.newDeck').style.display = 'block';
+}
+document.querySelector(".addDeckBTN").addEventListener('click',addNewDeck)
+async function addNewDeck(){
+    const newDeckName = document.querySelector('.newDeckName').value;
+    document.querySelector('.newDeck').style.display = 'none';
+    const newDeckRequest = await fetch('/create_deck', {
+        method:'post',
+        headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                newDeckName:newDeckName})
+    })
+    const data = await newDeckRequest.json()
+    console.log(data)   
+}
 
 // document.querySelector('.test').addEventListener('click', async(e)=>{
 //     e.preventDefault()

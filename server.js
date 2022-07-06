@@ -7,7 +7,7 @@ app.set('view engine', 'ejs')
 app.use(express.json())
 app.use(express.static(__dirname + '/public'))
 
-MongoClient.connect(DB_STRING)
+MongoClient.connect(`mongodb+srv://Arx_Lancifer:jRjYldvotSLLxMxh@cluster0.w4sq0l0.mongodb.net/?retryWrites=true&w=majority`)
 .then(client =>{
     console.log('Connected to MTG Database')
     const deckDB = client.db('mtg-deck-builder');
@@ -19,11 +19,13 @@ MongoClient.connect(DB_STRING)
         //    deckCollection.update({},{$set:{quantity:1}})
         // })
         //console.log(await deckCollection.find({name: "Ancestor's Chosen"}).toArray())
-        var ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress 
+        // var ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress 
         const deckname = req.query.name || 'mydeck';
         try {
         const deck =  await deckDB.collection(`${deckname}`).find().toArray(); //deckDB.collection(`${deckname}`)
-        res.render('index.ejs', {cards:deck})
+        const allDecks = await deckDB.listCollections({},{nameOnly:true}).toArray();
+        // console.log(allDecks)
+        res.render('index.ejs', {cards:deck, allDecks:allDecks})
         } catch (error) {
             console.log(error)
         }
@@ -65,14 +67,12 @@ MongoClient.connect(DB_STRING)
     app.post('/create_deck', async(req, res)=>{
         try {
             // if(!deckDB.listCollections({name:'A new collection'}))
-                await deckDB.createCollection('A new collection');
+            const newDeckName = req.body.newDeckName;
+                await deckDB.createCollection(newDeckName);
                 res.json("newDeck created")
         } catch (error) {
             res.json('Deck already exists')
-        }
-        
-        
-        
+        } 
     })
     
     app.listen(PORT, ()=>{
