@@ -22,7 +22,12 @@
                 <span class="open-window">&#127136;</span>
                 <p>Deck_one</p>
             </div>
-            <div><%=allDecks[0].name%></div>
+            <%allDecks.map(deck=>{%>
+                <div class="deck">
+                <span class="open-window">&#127136;</span>
+                <p><%=deck.name%></p>
+                </div>
+            <%})%>
             <div class="deck">
                 <span class="open-window createDeck">&#127220;</span>
                 <p>Create deck</p>

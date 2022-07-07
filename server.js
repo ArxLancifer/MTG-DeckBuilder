@@ -28,13 +28,27 @@ MongoClient.connect(`mongodb+srv://Arx_Lancifer:jRjYldvotSLLxMxh@cluster0.w4sq0l
         res.render('index.ejs', {cards:deck, allDecks:allDecks})
         } catch (error) {
             console.log(error)
+        }  
+    })
+    app.get('/deckCollection', async function(req,res){
+        console.log(req.query.name);
+        try {
+            const deckname = req.query.name;
+            const deck =  await deckDB.collection(`${deckname}`).find().toArray();
+            const allDecks = await deckDB.listCollections({},{nameOnly:true}).toArray();
+            //Perform speed with Promise.all 
+            //const data = await Promise.all([deckDB.collection(`${deckname}`).find().toArray(), await deckDB.listCollections({},{nameOnly:true}).toArray()])
+            res.render('index.ejs', {cards:deck, allDecks:allDecks})
+        } catch (error) {
+            res.status(404)
+            res.send('Deck cant be found')
         }
        
     })
-    
     app.post('/deck_builder', (req, res)=>{
+        console.log(req.query)
        try{
-        deckCollection.insertOne(req.body)
+        deckCollection.insertOne(req.body) //-> need to change this dynamicly for deck card insertion
         .then(result=>res.json("Card added succefully"))
        }catch(error){
         console.error(error)

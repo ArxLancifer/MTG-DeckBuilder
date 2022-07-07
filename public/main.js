@@ -24,7 +24,9 @@ removeCard.addEventListener('click', deleteCard)
 /* Fetch Functions */
 async function insertCard(e) {
     e.preventDefault()
-    
+    let deckURL = new URL(window.location.href);
+        let deckNameParam = deckURL.searchParams.get('name');
+        console.log(x)
     if (cardName.value == "" || cardPicture.value == "") {
         console.log("Card and Link should have VALUE")
         return;
@@ -35,7 +37,8 @@ async function insertCard(e) {
         body: JSON.stringify({
             name: cardName.value,
             img: cardPicture.value,
-            quantity:1
+            quantity:1,
+            deckName:deckNameParam
         })
     }).then(res => {
         if (res.ok) return res.json()
