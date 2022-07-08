@@ -176,6 +176,17 @@ async function addNewDeck(){
     console.log(data)   
 }
 
+//Deck navigation links 
+
+function deckNavs(){
+    let deckNavsArray = []
+    const deckNavs = document.querySelectorAll('.deck').forEach(elem=>deckNavsArray.push(elem));
+    deckNavsArray.shift()
+    deckNavsArray.pop()
+    deckNavsArray.forEach(cardBTN => cardBTN.addEventListener('click', function(e){
+        window.location.href = `/deckCollection?name=${e.currentTarget.querySelector('p').textContent}`
+    }))
+}
 // document.querySelector('.test').addEventListener('click', async(e)=>{
 //     e.preventDefault()
 //     await fetch('/deck_builder', {
