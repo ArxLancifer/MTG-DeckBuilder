@@ -18,18 +18,18 @@
     <header>
         <h1>Build you deck summoner</h1>
         <div class="decksCollection">
-            <div class="deck">
-                <span class="open-window">&#127136;</span>
-                <p>Deck_one</p>
-            </div>
+            <!-- <div class="deck">
+                <span class="open-window">&#127220;</span>
+                <p>Current Deck</p>
+            </div> -->
             <%allDecks.map(deck=>{%>
                 <div class="deck">
-                <span class="open-window">&#127136;</span>
+                <span class="open-window">&#127220;</span>
                 <p><%=deck.name%></p>
                 </div>
             <%})%>
             <div class="deck">
-                <span class="open-window createDeck">&#127220;</span>
+                <span class="open-window createDeck">&#127207;</span>
                 <p>Create deck</p>
             </div>
         </div>
@@ -97,11 +97,11 @@
                 </div>
                 <%})%>
         </section>
-        <button class="test">put req</button>
     </main>
     <section class="newDeck">
         <input class="newDeckName" type="text" placeholder="Deck Name">
         <div class="addDeckBTN">Add deck</div>
+        <span class="close-window">&#66338;</span>
     </section>
 </body>
 </html>

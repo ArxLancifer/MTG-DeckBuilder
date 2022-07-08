@@ -195,12 +195,20 @@ span.deleteMsg{
     font-size: 4rem;
     cursor: pointer;
     color: rgb(9, 0, 58);
+    padding: 0 1%;
+    border-radius: 3px;
+  }
+  .decksCollection > div:first-child>span{
+   box-shadow:inset 3px 3px 8px rgb(111, 0, 255),inset -3px -3px 8px rgb(111, 0, 255);
   }
   .decksCollection{
     display: flex;
     gap: 1rem;
     text-align: center;
     align-items: flex-end;
+  }
+  .decksCollection > div.deck{
+   width: 10%;
   }
   .createDeck + p{
     font-weight: 700;
@@ -216,7 +224,7 @@ span.deleteMsg{
 /*New Deck*/
 .newDeck{
     position: absolute;
-    padding: 2% 0;
+    padding: 4% 0;
     border-radius: 3px;
     top: 50%;  
     left: 50%; 

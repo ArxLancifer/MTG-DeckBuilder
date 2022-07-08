@@ -3,7 +3,7 @@ const removeCard = document.querySelector('.removeCardButton');
 const updateCard = document.querySelector('.changeCardButton');
 const pictureConfirm = document.querySelector('.picture_confirm');
 const picture_monitor = document.querySelector('.picture_monitor');
-const closeDeckSlider = document.querySelector('.close-window');
+const closeDeckSlider = document.querySelectorAll('.close-window');
 const openDeckSlider = document.querySelector('.open-window');
 const cardName = document.querySelector('input[name="cardName"]');
 const cardPicture = document.querySelector('input[name="cardPicture"]');
@@ -26,7 +26,6 @@ async function insertCard(e) {
     e.preventDefault()
     let deckURL = new URL(window.location.href);
         let deckNameParam = deckURL.searchParams.get('name');
-        console.log(x)
     if (cardName.value == "" || cardPicture.value == "") {
         console.log("Card and Link should have VALUE")
         return;
@@ -61,9 +60,17 @@ async function deleteCard(e) {
 
 
 /* Deck slider window controls*/
-closeDeckSlider.addEventListener('click', () => {
-    document.querySelector('.slide-container').style.display = "none"
+closeDeckSlider.forEach(closeBTN=>{
+    closeBTN.addEventListener('click', (e) => {
+        console.log(e.target.parentNode)
+        e.target.parentNode.style.display = "none"
+       // document.querySelector('.slide-container').style.display = "none"
+    })
 })
+// addEventListener('click', (e) => {
+    // console.log(e.target.parentNode)
+   // document.querySelector('.slide-container').style.display = "none"
+// })
 openDeckSlider.addEventListener('click', () => {
     document.querySelector('.slide-container').style.display = "block"
 })
