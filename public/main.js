@@ -25,7 +25,7 @@ removeCard.addEventListener('click', deleteCard)
 async function insertCard(e) {
     e.preventDefault()
     let deckURL = new URL(window.location.href);
-        let deckNameParam = deckURL.searchParams.get('name');
+    let deckNameParam = deckURL.searchParams.get('name');
     if (cardName.value == "" || cardPicture.value == "") {
         console.log("Card and Link should have VALUE")
         return;
@@ -47,11 +47,14 @@ async function insertCard(e) {
 /*Fetch Delete card */
 async function deleteCard(e) {
     e.preventDefault()
+    let deckURL = new URL(window.location.href);
+    let deckNameParam = deckURL.searchParams.get('name');
     await fetch('/deck_builder', {
         method: 'delete',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-            cardName: cardName.value
+            cardName: cardName.value,
+            deckName:deckNameParam
         })
     }).then(res => {
         window.location.reload(true)
@@ -106,6 +109,8 @@ plusIcon.forEach(icon => {
 /* Check icon to update card quantity */
 checkUpdateIcon.forEach(icon => {
     icon.addEventListener('click', async (e) => {
+        let deckURL = new URL(window.location.href);
+        let deckNameParam = deckURL.searchParams.get('name');
         let cardName = e.target.parentNode.parentNode.querySelector('.cardName').textContent;
         let quantityToAdd = e.target.parentNode.querySelector('.cardCounter').value;
         console.log(quantityToAdd)
@@ -115,7 +120,8 @@ checkUpdateIcon.forEach(icon => {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 cardName: cardName,
-                quantityToAdd: quantityToAdd
+                quantityToAdd: quantityToAdd,
+                deckName:deckNameParam
             })
         }).then(res => {
             if (res.ok) return res.json()
@@ -178,7 +184,7 @@ async function addNewDeck(){
 
 //Deck navigation links 
 
-function deckNavs(){
+function deckSwitching(){
     let deckNavsArray = []
     const deckNavs = document.querySelectorAll('.deck').forEach(elem=>deckNavsArray.push(elem));
     deckNavsArray.shift()
@@ -186,7 +192,9 @@ function deckNavs(){
     deckNavsArray.forEach(cardBTN => cardBTN.addEventListener('click', function(e){
         window.location.href = `/deckCollection?name=${e.currentTarget.querySelector('p').textContent}`
     }))
+    document.querySelector('.decksCollection > div:first-child>span').style.boxShadow = "inset 3px 3px 8px rgb(111, 0, 255),inset -3px -3px 8px rgb(111, 0, 255)"
 }
+deckSwitching()
 // document.querySelector('.test').addEventListener('click', async(e)=>{
 //     e.preventDefault()
 //     await fetch('/deck_builder', {

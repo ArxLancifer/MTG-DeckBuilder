@@ -199,8 +199,9 @@ span.deleteMsg{
     border-radius: 3px;
   }
   .decksCollection > div:first-child>span{
-   box-shadow:inset 3px 3px 8px rgb(111, 0, 255),inset -3px -3px 8px rgb(111, 0, 255);
+   transition: box-shadow 400ms ease-out;
   }
+  
   .decksCollection{
     display: flex;
     gap: 1rem;

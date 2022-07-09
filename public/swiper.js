@@ -12,6 +12,7 @@ const swiper = new Swiper(".mySwiper", {
     spaceBetween: 1,
     slidesPerGroup: 1,
     lazy: true,
+    observer:true,
     pagination: {
       el: ".swiper-pagination",
       clickable: true,

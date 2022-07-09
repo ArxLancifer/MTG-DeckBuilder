@@ -60,7 +60,7 @@ MongoClient.connect(`mongodb+srv://Arx_Lancifer:jRjYldvotSLLxMxh@cluster0.w4sq0l
     })
     
     app.delete('/deck_builder',async (req, res)=>{
-        deckCollection.deleteOne(
+        deckDB.collection(`${req.body.deckName}`).deleteOne(
             {name:req.body.cardName},
             ).then(result=>{
             res.json('Card Deleted')
@@ -70,7 +70,7 @@ MongoClient.connect(`mongodb+srv://Arx_Lancifer:jRjYldvotSLLxMxh@cluster0.w4sq0l
     })
 
     app.put('/deck_builder', (req, res)=>{
-        deckCollection.updateOne(
+        deckDB.collection(`${req.body.deckName}`).updateOne(
             {name:req.body.cardName,
             },
             {$inc:{quantity:+req.body.quantityToAdd}}
