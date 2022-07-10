@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
     <link rel="stylesheet" href="style.css">
+    <link href="//cdn.jsdelivr.net/npm/mana-font@latest/css/mana.min.css" rel="stylesheet" type="text/css" />
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <script src="https://kit.fontawesome.com/05bc888b6b.js" crossorigin="anonymous"></script>
     <script src="main.js" defer></script>
@@ -42,6 +43,14 @@
             <label for="cardPicture">Card Picture</label>
             <input type="text" name="cardPicture" placeholder="Card Picture (link)" required>
             <span class="picture_confirm">Confirm Picture</span>
+            <div class="manaCost">
+            <div><span class="generalMana">x</span></div>
+            <div><span class="ms ms-g"></span><span class="mana green">1</span></div>
+            <div><span class="ms ms-u"></span><span class="mana blue">1</span></div>
+            <div><span class="ms ms-b"></span><span class="mana black">1</span></div>
+            <div><span class="ms ms-w"></span><span class="mana white">1</span></div>
+            <div><span class="ms ms-r"></span><span class="mana red">1</span></div>
+            </div>
             <div class="postButtons">
                 <button class="addCardButton">Add</button>
                 <button class="removeCardButton">Remove</button>

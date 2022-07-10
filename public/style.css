@@ -1,3 +1,4 @@
+ 
  *{
     padding: 0;
     margin: 0;
@@ -46,6 +47,45 @@ h1{
     background-color: lightgray;
     border-radius: 3px;
     font-size: 2rem; 
+}
+.manaCost > div{
+    padding: 0 2%;
+}
+.manaCost > div, .manaCost > div>span{
+    display: inline-block;
+}
+.manaCost > div > .mana{
+    vertical-align: super;
+    font-style: italic;
+    font-size: 1rem;
+    color: #fff;
+}
+.manaCost > div > .mana::before{
+    content: "\00D7";
+}
+.manaCost >div >span {
+    border-radius: 50%;
+    font-size: 1.4rem;
+}
+
+.generalMana{
+    background-color: darkgray;
+    width: 1.4rem;
+    height: 1.4rem;
+    line-height: 1.2rem;
+    text-align: center;
+}
+.ms-g{
+    color: #69bd85;
+}
+.ms-u{
+    color: #aae0fa;
+}
+.ms-w{
+    background-color: #fff;
+}
+.ms-r{
+    background-color: rgb(237,86,81);
 }
 .searchCard{
     position: relative;

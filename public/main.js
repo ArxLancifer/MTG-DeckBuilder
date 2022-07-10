@@ -160,6 +160,19 @@ searchCardByName.addEventListener('click', async () => {
             console.log(e.target)
             cardName.value = e.target.name;
             cardPicture.value = e.target.src;
+            let manaString = cardData.find(card=>card.name===`${cardName.value}`).manaCost.replace(/[{}]/g, "");
+            let blueMana = manaString.replace(/[^U]/g,"").length;
+            let blackMana = manaString.replace(/[^B]/g,"").length;
+            let whiteMana = manaString.replace(/[^W]/g,"").length;
+            let greenMana = manaString.replace(/[^G]/g,"").length;
+            let redMana = manaString.replace(/[^R]/g,"").length;
+            console.log(blueMana,blackMana,redMana,greenMana)
+            document.querySelector('.generalMana').textContent = cardData.find(card=>card.name===`${cardName.value}`).cmc;
+            document.querySelector('.red').textContent = redMana;
+            document.querySelector('.blue').textContent = blueMana;
+            document.querySelector('.black').textContent = blackMana;
+            document.querySelector('.green').textContent = greenMana;
+            document.querySelector('.white').textContent = whiteMana;
         })
     })
 })
