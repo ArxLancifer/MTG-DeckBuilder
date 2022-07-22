@@ -263,7 +263,7 @@ span.deleteMsg{
   } */
 
 /*New Deck*/
-.newDeck{
+.newDeck, .deleteDeck{
     position: absolute;
     padding: 4% 0;
     border-radius: 3px;
@@ -274,6 +274,34 @@ span.deleteMsg{
     width: 20%;
     text-align: center;
     display: none;
+    z-index: 10;
+}
+.deleteDeckBTN{
+    background-color: rgb(255, 1, 1);
+    font-size: 1.2rem;
+    font-weight: 600;
+    padding: 1%;
+}
+.deleteBTN{
+    width: 40%;
+    background-color: orangered;
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin: 0 auto;
+    padding: 1%;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: box-shadow 200ms linear;
+}
+.deleteBTN:hover{
+    box-shadow: 3px 3px 2px darkgray;
+}
+.newDeckError{
+    color: rgb(78, 0, 0);
+    font-size: 1.2rem;
+    opacity: 0;
+    transition: opacity 100ms ease-out;
 }
 .addDeckBTN{
     padding: 2%;

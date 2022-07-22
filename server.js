@@ -12,7 +12,6 @@ MongoClient.connect(`mongodb+srv://Arx_Lancifer:jRjYldvotSLLxMxh@cluster0.w4sq0l
     console.log('Connected to MTG Database')
     const deckDB = client.db('mtg-deck-builder');
     const deckCollection = deckDB.collection('mydeck')
-
     app.get(`/`, async (req, res)=>{ //app.get(`name=${deckname}`, async (req, res)
         //Used this 3 lines to set quantity values ive forgot for all documents
         // await deckCollection.find().forEach(item=>{
@@ -20,6 +19,8 @@ MongoClient.connect(`mongodb+srv://Arx_Lancifer:jRjYldvotSLLxMxh@cluster0.w4sq0l
         // })
         //console.log(await deckCollection.find({name: "Ancestor's Chosen"}).toArray())
         // var ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress 
+        const mylog = await deckDB.listCollections({},{nameOnly:true}).toArray()
+        console.log(mylog)
         const deckname = req.query.name || 'mydeck';
         try {
         const deck =  await deckDB.collection(`${deckname}`).find().toArray(); //deckDB.collection(`${deckname}`)
@@ -68,6 +69,21 @@ MongoClient.connect(`mongodb+srv://Arx_Lancifer:jRjYldvotSLLxMxh@cluster0.w4sq0l
 
 
     })
+    app.delete('/delete_deck', async (req,res)=>{
+        
+        const deckToDelete = req.body.deckName;
+        if(deckToDelete === 'mydeck'){
+            res.status(404);
+            res.json("You can not delete this deck")
+            res.end();
+        }else
+        {
+            deckDB.collection(`${deckToDelete}`).drop();
+            res.json(deckToDelete)
+        }
+        
+    })
+
 
     app.put('/deck_builder', (req, res)=>{
         deckDB.collection(`${req.body.deckName}`).updateOne(
@@ -77,7 +93,6 @@ MongoClient.connect(`mongodb+srv://Arx_Lancifer:jRjYldvotSLLxMxh@cluster0.w4sq0l
         ).then(result=>{
             res.json('One more card added')
         })
-        
     })
 
     app.post('/create_deck', async(req, res)=>{

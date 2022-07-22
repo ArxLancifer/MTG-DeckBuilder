@@ -184,6 +184,10 @@ function newDeck(){
 document.querySelector(".addDeckBTN").addEventListener('click',addNewDeck)
 async function addNewDeck(){
     const newDeckName = document.querySelector('.newDeckName').value;
+    if(newDeckName ===''){
+        document.querySelector('.newDeckError').style.opacity = '1';
+        return null;
+    }
     document.querySelector('.newDeck').style.display = 'none';
     const newDeckRequest = await fetch('/create_deck', {
         method:'post',
@@ -192,7 +196,33 @@ async function addNewDeck(){
                 newDeckName:newDeckName})
     })
     const data = await newDeckRequest.json()
-    console.log(data)   
+    if(newDeckRequest.status == 200){
+        window.location.reload(true) 
+    }
+}
+document.querySelector('.deleteDeckBTN').addEventListener('click', (e)=>{
+    e.preventDefault();
+    document.querySelector('.deleteDeck').style.display = "block";
+} )
+document.querySelector('.deleteBTN').addEventListener('click', async (e)=>{
+    const respondedStatus = await deleteDeck()
+    if(respondedStatus == 200){
+        window.location.reload(true);
+    }else{
+    document.querySelector('.deleteDeck h3').textContent = 'Unable to delete this deck';
+    }
+    
+})
+async function deleteDeck(){
+    const queryDeckName = new URLSearchParams(window.location.search).get('name');
+    const deleteFetch = await fetch('/delete_deck',{
+        method:'delete',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({deckName:queryDeckName})
+    })
+    const resultFetch = await deleteFetch.json()
+    console.log(resultFetch);
+    return deleteFetch.status;
 }
 
 //Deck navigation links 
