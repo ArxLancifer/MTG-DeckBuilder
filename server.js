@@ -19,13 +19,13 @@ MongoClient.connect(`mongodb+srv://Arx_Lancifer:jRjYldvotSLLxMxh@cluster0.w4sq0l
         // })
         //console.log(await deckCollection.find({name: "Ancestor's Chosen"}).toArray())
         // var ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress 
-        const mylog = await deckDB.listCollections({},{nameOnly:true}).toArray()
-        console.log(mylog)
+        // const mylog = await client.db('mtg-deck-builder').collection('mydeck').find({name:'Torrential Gearhulk'}).toArray();
         const deckname = req.query.name || 'mydeck';
         try {
-        const deck =  await deckDB.collection(`${deckname}`).find().toArray(); //deckDB.collection(`${deckname}`)
+           
+        const deck =  await deckDB.collection(`${deckname}`).find().toArray();
         const allDecks = await deckDB.listCollections({},{nameOnly:true}).toArray();
-        // console.log(allDecks)
+        allDecks.sort(obj=>obj.name === 'mydeck' ? -1:1);
         res.render('index.ejs', {cards:deck, allDecks:allDecks})
         } catch (error) {
             console.log(error)

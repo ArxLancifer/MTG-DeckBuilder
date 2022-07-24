@@ -65,15 +65,9 @@ async function deleteCard(e) {
 /* Deck slider window controls*/
 closeDeckSlider.forEach(closeBTN=>{
     closeBTN.addEventListener('click', (e) => {
-        console.log(e.target.parentNode)
         e.target.parentNode.style.display = "none"
-       // document.querySelector('.slide-container').style.display = "none"
     })
 })
-// addEventListener('click', (e) => {
-    // console.log(e.target.parentNode)
-   // document.querySelector('.slide-container').style.display = "none"
-// })
 openDeckSlider.addEventListener('click', () => {
     document.querySelector('.slide-container').style.display = "block"
 })
@@ -93,7 +87,6 @@ minusIcon.forEach(icon => {
     icon.addEventListener('click', (e) => {
         let cardQuantity = e.target.parentNode.parentNode.querySelector("span").textContent.split('')[1];
         let cardCounterInput = e.target.parentNode.querySelector('.cardCounter');
-        console.log(cardQuantity - (-cardCounterInput.value))
         cardQuantity - (-cardCounterInput.value) > 0 ? cardCounterInput.value--:null
     });
 })
@@ -113,8 +106,6 @@ checkUpdateIcon.forEach(icon => {
         let deckNameParam = deckURL.searchParams.get('name');
         let cardName = e.target.parentNode.parentNode.querySelector('.cardName').textContent;
         let quantityToAdd = e.target.parentNode.querySelector('.cardCounter').value;
-        console.log(quantityToAdd)
-        console.log(cardName)
         await fetch('/deck_builder', {
             method: 'put',
             headers: { 'Content-Type': 'application/json' },
@@ -150,14 +141,12 @@ searchCardByName.addEventListener('click', async () => {
         .then(data => {
             cardData = data.cards.slice(0, 4).filter((obj) => obj.imageUrl)
         }).catch(error => console.log(error))
-     console.log(cardData)
     /*Function that creates card selection container needs to be added here*/
     cardData.forEach(data => {   
         cardsSelection(data)
     })
     document.querySelectorAll(".searchResults img").forEach(image=>{
         image.addEventListener('click',(e)=>{
-            console.log(e.target)
             cardName.value = e.target.name;
             cardPicture.value = e.target.src;
             let manaString = cardData.find(card=>card.name===`${cardName.value}`).manaCost.replace(/[{}]/g, "");
@@ -166,7 +155,6 @@ searchCardByName.addEventListener('click', async () => {
             let whiteMana = manaString.replace(/[^W]/g,"").length;
             let greenMana = manaString.replace(/[^G]/g,"").length;
             let redMana = manaString.replace(/[^R]/g,"").length;
-            console.log(blueMana,blackMana,redMana,greenMana)
             document.querySelector('.generalMana').textContent = cardData.find(card=>card.name===`${cardName.value}`).cmc;
             document.querySelector('.red').textContent = redMana;
             document.querySelector('.blue').textContent = blueMana;
@@ -220,8 +208,7 @@ async function deleteDeck(){
         headers:{'Content-Type':'application/json'},
         body:JSON.stringify({deckName:queryDeckName})
     })
-    const resultFetch = await deleteFetch.json()
-    console.log(resultFetch);
+    const resultFetch = await deleteFetch.json();
     return deleteFetch.status;
 }
 
